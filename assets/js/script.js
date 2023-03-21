@@ -7,6 +7,14 @@ $( document ).ready(function () {
   // local storage.
   var saveButtonEle = $('.saveBtn');
 
+  // handle displaying the time
+  var timeDisplayEl = $('#currentDay')
+  function displayTime() {
+    var dateToday = dayjs().format('MM/DD/YYYY');
+    timeDisplayEl.text(dateToday);
+  }
+  setInterval(displayTime, 1000);
+
 
 
   saveButtonEle.on('click', function() {
