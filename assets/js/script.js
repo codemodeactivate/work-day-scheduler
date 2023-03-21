@@ -23,7 +23,7 @@ $( document ).ready(function () {
   for (let i = 0; i < businessHours; i++) {
     //convert from military time - hh a
     var startOfDay = dayjs().startOf('day').hour(7);
-    var printedTime = startOfDay.add(i, 'hour').format("h A");
+    var printedTime = startOfDay.add(i, 'hour').format("hA");
     console.log(printedTime);
     var rowTemplate = `
     <div id="hour-${printedTime}" class="row time-block past">
@@ -67,6 +67,12 @@ $( document ).ready(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
+  timeWhen = () => {
+    console.log("past present or future");
+    //if current hour, append present. if past, append past. if future, append future
+
+  }
+  timeWhen();
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
