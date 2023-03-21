@@ -11,11 +11,11 @@ You'll need to use the [Day.js](https://day.js.org/en/) library to work with dat
 
 ## To-do
 ```
-[ ] Add current time to respective element
-[ ] Add standard business hours
-[ ] Color code each timeblock based on past, present, or future
+- [ ] Add current time to respective element
+- [ ] Add standard business hours
+- [ ] Color code each timeblock based on past, present, or future
 [X] when enter event, it is saved to local storage
-[ ] when the page is refreshed, the events persist
+- [ ] when the page is refreshed, the events persist
 
 ## User Story
 
