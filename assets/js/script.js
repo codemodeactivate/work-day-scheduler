@@ -1,6 +1,9 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+
+
+var businessHours = 12;
 $( document ).ready(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -14,6 +17,27 @@ $( document ).ready(function () {
     timeDisplayEl.text(dateToday);
   }
   setInterval(displayTime, 1000);
+  //populate standard business hours.
+  //assume standard business hours are 7AM - 6PM local time - AMERICA!!
+  const hours = $('#hours');
+  for (let i = 0; i < businessHours; i++) {
+    //convert from military time - hh a
+    var startOfDay = dayjs().startOf('day').hour(7);
+    var printedTime = startOfDay.add(i, 'hour').format("h A");
+    console.log(printedTime);
+    var rowTemplate = `
+    <div id="hour-${printedTime}" class="row time-block past">
+      <div class="col-2 col-md-1 hour text-center py-3">${printedTime}</div>
+      <textarea class="col-8 col-md-10 description" rows="3"></textarea>
+      <button class="btn saveBtn col-2 col-md-1" aria-label="save">
+      <i class="fas fa-save" aria-hidden="true"></i>
+      </button>
+    </div>`;
+    var hourEle = $($.parseHTML(rowTemplate));
+    hourEle.appendTo(hours);
+
+  }
+
 
 
 
