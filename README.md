@@ -1,4 +1,7 @@
 # 05 Third-Party APIs: Work Day Scheduler
+Case Western Coding Bootcamp Module 05 Challenge
+
+[Live Demo](https://codemodeactivate.github.io/code-quiz/)
 
 ## Your Task
 
