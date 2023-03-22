@@ -9,7 +9,7 @@ $( document ).ready(function () {
   // handle displaying the time
   var timeDisplayEl = $('#currentDay')
   function displayTime() {
-    var dateToday = dayjs().format('MM/DD/YYYY');
+    var dateToday = dayjs().format('dddd, MM/DD/YYYY');
     timeDisplayEl.text(dateToday);
   }
   setInterval(displayTime, 1000);
@@ -17,7 +17,7 @@ $( document ).ready(function () {
   //assume standard business hours are 7AM - 6PM local time - AMERICA!!
   const hours = $('#hours');
   timeWhen = (time) => {
-    console.log("past present or future");
+
     //if current hour, append present. if past, append past. if future, append future
     //if the id is earlier in the day, past
     //if id is the current hour, present
@@ -91,18 +91,7 @@ $( document ).ready(function () {
   // attribute of each time-block be used to conditionally add or remove the
   // past, present, and future classes? How can Day.js be used to get the
   // current hour in 24-hour time?
-  timeWhen = () => {
-    console.log("past present or future");
-    //if current hour, append present. if past, append past. if future, append future
-    //if the id is earlier in the day, past
-    //if id is the current hour, present
-    //else future
 
-    console.log(dayjs().isBefore(11, 'h'))
-
-
-
-  }
 
   //colorize!
 
