@@ -1,7 +1,3 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
-
 
 var businessHours = 12;
 $( document ).ready(function () {
@@ -20,13 +16,36 @@ $( document ).ready(function () {
   //populate standard business hours.
   //assume standard business hours are 7AM - 6PM local time - AMERICA!!
   const hours = $('#hours');
+  timeWhen = (time) => {
+    console.log("past present or future");
+    //if current hour, append present. if past, append past. if future, append future
+    //if the id is earlier in the day, past
+    //if id is the current hour, present
+    //else future
+    var timeTemp = dayjs(time, 'hA');
+
+    if (dayjs().isAfter(timeTemp, 'hour')) {
+      console.log('past');
+      tense = 'past';
+      console.log(isAfter(timeTemp, 'hour'));
+    } else if (dayjs().isSame(timeTemp, 'hour')) {
+      console.log("present");
+      tense = 'present';
+    } else {
+      console.log('future');
+      console.log(dayjs().isAfter(3, 'hour'));
+      tense = 'future';
+    }
+  }
+
   for (let i = 0; i < businessHours; i++) {
     //convert from military time - hh a
+    let tense = "";
     var startOfDay = dayjs().startOf('day').hour(7);
     var printedTime = startOfDay.add(i, 'hour').format("hA");
     console.log(printedTime);
     var rowTemplate = `
-    <div id="hour-${printedTime}" class="row time-block past">
+    <div id="hour-${printedTime}" class="row time-block ${tense}">
       <div class="col-2 col-md-1 hour text-center py-3">${printedTime}</div>
       <textarea class="col-8 col-md-10 description" rows="3"></textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
@@ -35,6 +54,11 @@ $( document ).ready(function () {
     </div>`;
     var hourEle = $($.parseHTML(rowTemplate));
     hourEle.appendTo(hours);
+
+    timeWhen(printedTime);
+
+
+
 
   }
 
@@ -70,13 +94,22 @@ $( document ).ready(function () {
   timeWhen = () => {
     console.log("past present or future");
     //if current hour, append present. if past, append past. if future, append future
+    //if the id is earlier in the day, past
+    //if id is the current hour, present
+    //else future
+
+    console.log(dayjs().isBefore(11, 'h'))
+
+
 
   }
-  timeWhen();
+
+  //colorize!
+
   //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+
+
 });
