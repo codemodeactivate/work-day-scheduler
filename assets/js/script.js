@@ -22,20 +22,19 @@ $( document ).ready(function () {
     //if the id is earlier in the day, past
     //if id is the current hour, present
     //else future
-    var timeTemp = dayjs(time, 'hA');
-
-    if (dayjs().isAfter(timeTemp, 'hour')) {
-      console.log('past');
-      tense = 'past';
-      console.log(isAfter(timeTemp, 'hour'));
-    } else if (dayjs().isSame(timeTemp, 'hour')) {
-      console.log("present");
-      tense = 'present';
+    const currentHour = dayjs();
+    const hour = dayjs(time, 'hA');
+    let classToAdd;
+    if (hour.isBefore(currentHour, 'hour')) {
+      classToAdd = 'past';
+    } else if (hour.isSame(currentHour, 'hour')) {
+      classToAdd = 'present';
     } else {
-      console.log('future');
-      console.log(dayjs().isAfter(3, 'hour'));
-      tense = 'future';
+      classToAdd = 'future';
     }
+
+    const rowId = `#hour-${time}`;
+    $(rowId).addClass(classToAdd);
   }
 
   for (let i = 0; i < businessHours; i++) {
@@ -53,8 +52,9 @@ $( document ).ready(function () {
       </button>
     </div>`;
     var hourEle = $($.parseHTML(rowTemplate));
-    hourEle.appendTo(hours);
 
+
+    hourEle.appendTo(hours);
     timeWhen(printedTime);
 
 
