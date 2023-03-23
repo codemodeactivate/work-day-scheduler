@@ -1,10 +1,10 @@
 
-var businessHours = 20;
+var businessHours = 12;
 $( document ).ready(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage.
-  var saveButtonEle = $('.saveBtn');
+
   // handle displaying the time
   var timeDisplayEl = $('#currentDay')
   const hours = $('#hours');
@@ -70,7 +70,18 @@ $( document ).ready(function () {
 
 
     //timeWhen(printedTime);
+    var saveButtonEle = $('.saveBtn');
+    saveButtonEle.on('click', function() {
+      var hourText = $(this).siblings('.hour').text();
+      var descriptionText = $(this).siblings('.description').val();
+      console.log('save button clicked');
+      //save userInput to localstorage
+      localStorage.setItem(hourText, descriptionText);
 
+
+      console.log(hourText, descriptionText);
+
+    });
 
 
 
@@ -79,17 +90,7 @@ $( document ).ready(function () {
   //timeTenseClass();
 
 
-  saveButtonEle.on('click', function() {
-    var hourText = $(this).siblings('.hour').text();
-    var descriptionText = $(this).siblings('.description').val();
-    console.log('save button clicked');
-    //save userInput to localstorage
-    localStorage.setItem(hourText, descriptionText);
 
-
-    console.log(hourText, descriptionText);
-
-  });
 
 
 
