@@ -1,5 +1,5 @@
 
-var businessHours = 12;
+var businessHours = 20;
 $( document ).ready(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
@@ -24,15 +24,15 @@ $( document ).ready(function () {
     //else future
     const currentHour = dayjs();
     const hour = dayjs(time, 'hA');
-    let classToAdd;
+    const timeTenseClass = (time) => {
     if (hour.isBefore(currentHour, 'hour')) {
-      classToAdd = 'past';
+      return 'past';
     } else if (hour.isSame(currentHour, 'hour')) {
-      classToAdd = 'present';
+      return 'present';
     } else {
-      classToAdd = 'future';
+      return 'future';
     }
-
+  }
     const rowId = `#hour-${time}`;
     $(rowId).addClass(classToAdd);
   }
