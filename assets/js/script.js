@@ -5,64 +5,78 @@ $( document ).ready(function () {
   // use the id in the containing time-block as a key to save the user input in
   // local storage.
   var saveButtonEle = $('.saveBtn');
-
   // handle displaying the time
   var timeDisplayEl = $('#currentDay')
+  const hours = $('#hours');
+
   function displayTime() {
     var dateToday = dayjs().format('dddd, MM/DD/YYYY');
     timeDisplayEl.text(dateToday);
+    timeTenseClass();
+
   }
-  setInterval(displayTime, 1000);
+
+
   //populate standard business hours.
   //assume standard business hours are 7AM - 6PM local time - AMERICA!!
-  const hours = $('#hours');
-  timeWhen = (time) => {
+
 
     //if current hour, append present. if past, append past. if future, append future
     //if the id is earlier in the day, past
     //if id is the current hour, present
     //else future
+
+    function timeTenseClass() {
     const currentHour = dayjs();
-    const hour = dayjs(time, 'hA');
-    const timeTenseClass = (time) => {
+    for (let i=0; i < businessHours; i++) {
+    const rowId = `#hour-${i}`;
+    const hour = dayjs().hour(7).add(i, 'hour');
     if (hour.isBefore(currentHour, 'hour')) {
-      return 'past';
+      $(rowId).removeClass('future present').addClass('past');
     } else if (hour.isSame(currentHour, 'hour')) {
-      return 'present';
+      $(rowId).removeClass('past future').addClass('present');
     } else {
-      return 'future';
+      $(rowId).removeClass('past present').addClass('future');
     }
   }
-    const rowId = `#hour-${time}`;
-    $(rowId).addClass(classToAdd);
-  }
+}
+    //const rowId = `#hour-${time}`;
+    //$(rowId).addClass(classToAdd);
+
+  setInterval(displayTime, 1000);
+
 
   for (let i = 0; i < businessHours; i++) {
     //convert from military time - hh a
-    let tense = "";
-    var startOfDay = dayjs().startOf('day').hour(7);
-    var printedTime = startOfDay.add(i, 'hour').format("hA");
-    console.log(printedTime);
+
+    //var startOfDay = dayjs().startOf('day').hour(7);
+    //var printedTime = startOfDay.add(i, 'hour').format("hA");
+    //var tense = timeTenseClass(printedTime);
+    //console.log(printedTime);
     var rowTemplate = `
-    <div id="hour-${printedTime}" class="row time-block ${tense}">
-      <div class="col-2 col-md-1 hour text-center py-3">${printedTime}</div>
+    <div id="hour-${i}" class="row time-block">
+      <div class="col-2 col-md-1 hour text-center py-3">${dayjs().hour(7).add(i, 'hour').format('hA')}</div>
       <textarea class="col-8 col-md-10 description" rows="3"></textarea>
       <button class="btn saveBtn col-2 col-md-1" aria-label="save">
       <i class="fas fa-save" aria-hidden="true"></i>
       </button>
     </div>`;
+
     var hourEle = $($.parseHTML(rowTemplate));
-
-
     hourEle.appendTo(hours);
-    timeWhen(printedTime);
+
+
+
+
+
+    //timeWhen(printedTime);
 
 
 
 
   }
 
-
+  //timeTenseClass();
 
 
   saveButtonEle.on('click', function() {
