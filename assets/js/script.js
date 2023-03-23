@@ -64,15 +64,20 @@ $( document ).ready(function () {
     </div>`;
 
     var hourEle = dayjs().hour(7).add(i,'hour').format('hA');
-
+    var thisHour = $(rowTemplate);
+    var savedVal = localStorage.getItem(`hour-${i}`);
+    if (savedVal) {
+      thisHour.find('.description').val(savedVal);
+    }
+    hours.append(thisHour);
 
 
 
     hourEle = $($.parseHTML(rowTemplate));
-    hourEle.appendTo(hours);
+    //hourEle.appendTo(hours);
 
     //timeWhen(printedTime);
-    var saveButtonEle = $('.saveBtn');
+    var saveButtonEle = $(rowTemplate).find('.saveBtn');
     saveButtonEle.on('click', function() {
       var hourID = $(this).parent().attr('id'); // get the key from the parent element's id
       var savedDesc = $(this).siblings('.description').val(); // get the value from the sibling element with the class 'description'
