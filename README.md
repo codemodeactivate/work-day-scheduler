@@ -3,6 +3,8 @@ Case Western Coding Bootcamp Module 05 Challenge
 
 [Live Demo](https://codemodeactivate.github.io/work-day-scheduler/)
 
+![Screenshot](./assets/images/demo.gif)
+
 ## Your Task
 
 Create a simple calendar application that allows a user to save events for each hour of the day by modifying starter code. This app will run in the browser and feature dynamically updated HTML and CSS powered by jQuery.
@@ -11,11 +13,11 @@ You'll need to use the [Day.js](https://day.js.org/en/) library to work with dat
 
 ## To-do
 
-- [ ] Add current time to respective element
-- [ ] Add standard business hours
-- [ ] Color code each timeblock based on past, present, or future
+- [X] Add current time to respective element
+- [X] Add standard business hours
+- [X] Color code each timeblock based on past, present, or future
 - [X] when enter event, it is saved to local storage
-- [ ] when the page is refreshed, the events persist
+- [X] when the page is refreshed, the events persist
 
 ## User Story
 
@@ -44,9 +46,6 @@ THEN the saved events persist
 ```
 
 The following animation demonstrates the application functionality:
-
-<!-- @TODO: create ticket to review/update image) -->
-![A user clicks on slots on the color-coded calendar and edits the events.](./Assets/05-third-party-apis-homework-demo.gif)
 
 ## Grading Requirements
 
