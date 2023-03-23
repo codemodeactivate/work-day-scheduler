@@ -79,7 +79,6 @@ for (let i = 0; i < businessHours; i++) {
       var hourID = $(this).parent().attr('id'); // get the key from the parent element's id
       var savedDesc = $(this).siblings('.description').val(); // get the value from the sibling element with the class 'description'
       localStorage.setItem(hourID, savedDesc); // set the key-value pair in local storage
-      console.log(hourID, savedDesc);
     });
   }
 
