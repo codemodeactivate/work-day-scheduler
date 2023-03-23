@@ -1,12 +1,16 @@
 
 var businessHours = 12;
 $( document ).ready(function () {
+for (let i = 0; i < businessHours; i++) {
+    var rowId = `#hour-${i}`;
+    var savedValue = localStorage.getItem(`hour-${i}`); // get the saved value for the key
+    if (savedValue) {
+      $(rowId).find('.description').val(savedValue); // set the value in the corresponding textarea element
+    }
+  }
 
 
 
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage.
 
   // handle displaying the time
   var timeDisplayEl = $('#currentDay')
@@ -44,8 +48,7 @@ $( document ).ready(function () {
     }
   }
 }
-    //const rowId = `#hour-${time}`;
-    //$(rowId).addClass(classToAdd);
+
 
   setInterval(displayTime, 1000);
 
@@ -63,7 +66,7 @@ $( document ).ready(function () {
       </button>
     </div>`;
 
-    var hourEle = dayjs().hour(7).add(i,'hour').format('hA');
+
     var thisHour = $(rowTemplate);
     var savedVal = localStorage.getItem(`hour-${i}`);
     if (savedVal) {
@@ -72,28 +75,12 @@ $( document ).ready(function () {
     hours.append(thisHour);
 
 
-
-    hourEle = $($.parseHTML(rowTemplate));
-    //hourEle.appendTo(hours);
-
-    //timeWhen(printedTime);
-    var saveButtonEle = $(rowTemplate).find('.saveBtn');
-    saveButtonEle.on('click', function() {
+    $(document).on('click', '.saveBtn', function() {
       var hourID = $(this).parent().attr('id'); // get the key from the parent element's id
       var savedDesc = $(this).siblings('.description').val(); // get the value from the sibling element with the class 'description'
       localStorage.setItem(hourID, savedDesc); // set the key-value pair in local storage
       console.log(hourID, savedDesc);
     });
-
-
-
-
   }
-
-
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-
 
 });
