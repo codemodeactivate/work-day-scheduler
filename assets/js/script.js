@@ -1,6 +1,9 @@
 
 var businessHours = 12;
 $( document ).ready(function () {
+
+
+
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
   // local storage.
@@ -15,6 +18,7 @@ $( document ).ready(function () {
     timeTenseClass();
 
   }
+
 
 
   //populate standard business hours.
@@ -49,10 +53,7 @@ $( document ).ready(function () {
   for (let i = 0; i < businessHours; i++) {
     //convert from military time - hh a
 
-    //var startOfDay = dayjs().startOf('day').hour(7);
-    //var printedTime = startOfDay.add(i, 'hour').format("hA");
-    //var tense = timeTenseClass(printedTime);
-    //console.log(printedTime);
+
     var rowTemplate = `
     <div id="hour-${i}" class="row time-block">
       <div class="col-2 col-md-1 hour text-center py-3">${dayjs().hour(7).add(i, 'hour').format('hA')}</div>
@@ -62,55 +63,29 @@ $( document ).ready(function () {
       </button>
     </div>`;
 
-    var hourEle = $($.parseHTML(rowTemplate));
+    var hourEle = dayjs().hour(7).add(i,'hour').format('hA');
+
+
+
+
+    hourEle = $($.parseHTML(rowTemplate));
     hourEle.appendTo(hours);
-
-
-
-
 
     //timeWhen(printedTime);
     var saveButtonEle = $('.saveBtn');
     saveButtonEle.on('click', function() {
-      var hourText = $(this).siblings('.hour').text();
-      var descriptionText = $(this).siblings('.description').val();
-      console.log('save button clicked');
-      //save userInput to localstorage
-      localStorage.setItem(hourText, descriptionText);
-
-
-      console.log(hourText, descriptionText);
-
+      var hourID = $(this).parent().attr('id'); // get the key from the parent element's id
+      var savedDesc = $(this).siblings('.description').val(); // get the value from the sibling element with the class 'description'
+      localStorage.setItem(hourID, savedDesc); // set the key-value pair in local storage
+      console.log(hourID, savedDesc);
     });
+
 
 
 
   }
 
-  //timeTenseClass();
 
-
-
-
-
-
-  //HINT: What does `this` reference in the click listener
-  // function?
-
-  //How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-
-
-  //colorize!
-
-  //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
